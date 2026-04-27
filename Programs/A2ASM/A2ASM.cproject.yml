@@ -22,7 +22,7 @@ project:
         - ../../ITS_BRD_LIB/Inc
         - ../../ITS_BRD_LIB/Utilities/AddFonts
 
-      #debug: "on"  # Aktiviert den Debug-Modus
+      # debug: "on"  # Aktiviert den Debug-Modus
 
       define:  # Präprozessordefinitionen
         - STM32F429xx
@@ -36,8 +36,6 @@ project:
       misc:
         - C:  # C-spezifische Compiler-Optionen
             - -std=c99
-            - -Wall
-            - -Wextra
           C-CPP:  # Optionen für C++
             - -fno-rtti
             - -funsigned-char
@@ -48,7 +46,7 @@ project:
             - -Wno-missing-variable-declarations
             - -Wno-missing-prototypes
             - -Wno-missing-noreturn
-            - -Wsign-conversion
+            - -Wno-sign-conversion
             - -Wno-nonportable-include-path
             - -Wno-reserved-id-macro
             - -Wno-unused-macros
@@ -76,7 +74,7 @@ project:
             - --info summarysizes
 
   linker:
-    - script: A1_ITSboard.sct
+    - script: A2ASM_ITSboard.sct
 
   groups:
     # Dokumentationsgruppe
@@ -179,7 +177,7 @@ project:
     # Benutzerdefinierte Programmdateien
     - group: Program/User/Src
       files:
-        - file: Src/main.c
+        - file: Src/main.s
 
 
   components:

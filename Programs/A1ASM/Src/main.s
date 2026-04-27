@@ -26,22 +26,22 @@ GPIO_D_CLR          equ (GPIOD_BASE + 0x1A)
     AREA  |.text|, CODE, READONLY, ALIGN = 3
     ALIGN
 main
-    BL initITSboard             ; needed by the board to setup
-    nop                         ; no operation
-    LDR     R6, =GPIO_D_SET     ; get address of the GPIO data set register
-    ;LDR     R7, =GPIO_D_CLR     ; get address of the GPIO data clear register
-    MOV     R0, #0x03           ; load mask 0b0001
-    ;MOV     R1, #0x02           ; load mask 0b0010
-    ;MOV     R2, #0x40           ; load mask 0b0100
-    ;MOV     R3, #0x80           ; load mask 0b1000
+    BL initITSboard            
+    nop                        
+    LDR     R6, =GPIO_D_SET    
+    ;LDR     R7, =GPIO_D_CLR   
+    MOV     R0, #0x03          
+    ;MOV     R1, #0x02         
+    ;MOV     R2, #0x40         
+    ;MOV     R3, #0x80         
 
     ; Set LED
-    STRB    R0, [R6]    ; switch on LED D14
-    ;STRB    R1, [R6]    ; switch on LED D15
-    ;STRB    R2, [R6]    ; switch on LED D08
-    ;STRB    R3, [R6]    ; switch on LED D09
-    ;STRB    R4, [R7]    ; switch off LED D14
-    ;STRB    R5, [R7]    ; switch off LED D15
+    STRB    R0, [R6]    
+    ;STRB    R1, [R6]   
+    ;STRB    R2, [R6]   
+    ;STRB    R3, [R6]   
+    ;STRB    R4, [R7]   
+    ;STRB    R5, [R7]   
     b .
     
     ALIGN
