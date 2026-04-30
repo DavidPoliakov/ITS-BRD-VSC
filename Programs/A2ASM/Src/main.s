@@ -37,17 +37,17 @@ main
     mov     R5,#ConstByteA  ; Konstante 0xaffe in R5 laden
     strh    R5,[R0]         ; Speichern der Konstante 0xaffe in VariableA
 
-	ldr     R0,=VariableC
+    ldr     R5,=VariableA   
 	ldrb    R5,[R0]      
 	ldrb    R6,[R0,#1]   
-	lsl     R7, #8       
-	orr     R6, R7       
-	strh    R6,[R0]      
+	lsl     R5, #8       
+	orr     R5, R6       
+	strh    R5,[R0]      
 
 ;* Change value from x1234 to x4321
     ldr     R1,=VariableB   ; Adresse von VariableB in R1
     ldrh    R8,[R1]         ; Wert von VariableB in R8
-    mov     R9, #0x21DE     ; Konstante 0x21DE in R9 laden (0x1234 -> 0x4321)
+    mov     R9, #0x21DE     ; Konstante 0x21DE in R9 laden 
     add     R8, R8, R9      ; R8 und R9 werden addiert, um die Bits zu vertauschen und in R8 gespeichert (0x1234 + 0x21DE = 0x4321)
     strh    R8,[R1]         ; Wert von R8 (0x4321) wird zurück in VariableB geschrieben
     b .                     ; Endlosschleife 
