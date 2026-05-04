@@ -44,7 +44,7 @@ main
 	orr     R5, R6       
 	strh    R5,[R0]      
 
-;* Change value from x1234 to x4321
+;* Change value from x1234 to x3412
     ldr     R1,=VariableB   ; Adresse von VariableB in R1
     ldrh    R8,[R1]         ; Wert von VariableB in R8
     mov     R9, #0x21DE     ; Konstante 0x21DE in R9 laden 
