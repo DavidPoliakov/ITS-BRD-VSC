@@ -39,7 +39,7 @@ main            PROC
                 mov   r0,#0x12                      ; Anw-1
 ; Konstante -128 in r1 laden
                 mov   r1,#-128                      ; Anw-2
-; Adresse 0x12345678 in r2 laden
+; Konstante 0x12345678 in r2 laden
                 ldr   r2,=0x12345678                ; Anw-3
 
 
@@ -82,7 +82,7 @@ main            PROC
                 ldr  r1,[r0]                        ; Anw-17
 ; 4 Bytes von MeinWortFeld[1] in r2 laden
                 ldr  r2,[r0,#4]                     ; Anw-18
-; Addition von r1 und r2 in r3 speichern
+; Addition von r1 und r2 in r3 speichern und nötige Flags setzen
                 adds r3,r1,r2                       ; Anw-19
 
 
@@ -90,7 +90,7 @@ main            PROC
                 ldr  r4,[r0,#8]                     ; Anw-20
 ; 4 Bytes von MeinWortFeld[3] in r5 laden
                 ldr  r5,[r0,#12]                    ; Anw-21
-; Subtraktion von r4 und r5 in r6 speichern
+; Subtraktion von r4 und r5 in r6 speichern und nötige Flags setzen
                 subs r6,r4,r5                       ; Anw-22
 
 
@@ -98,7 +98,7 @@ main            PROC
                 ldr  r7,[r0,#16]                    ; Anw-23
 ; 4 Bytes von MeinWortFeld[5] in r8 laden
                 ldr  r8,[r0,#20]                    ; Anw-24
-; Subtraktion von r7 und r8 in r9 speichern
+; Subtraktion von r7 und r8 in r9 speichern und nötige Flags setzen a
                 subs r9,r7,r8                       ; Anw-25
 
 
