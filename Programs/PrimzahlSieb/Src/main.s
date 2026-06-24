@@ -2,8 +2,11 @@
 ;* Globale Daten
 ;************************************************
                 AREA MyData, DATA, ALIGN=2
-sieb            SPACE 1001              
+sieb            SPACE 1001  
 
+primzahl		SPACE 200
+
+				EXPORT primzahl
                 EXPORT sieb
 ;***********************************************
 ;* Beginn des Programms *
@@ -15,7 +18,9 @@ sieb            SPACE 1001
                 EXTERN initITSboard
 main            PROC
                 bl    initITSboard 
+
 				LDR R0, =sieb 
+				LDR R5, =primzahl
 
 for_01
 				MOV R1, #2
@@ -59,7 +64,28 @@ endif_01
 step_02
 				ADD R1, R1, #1
 				B until_02 			; äußere Schleife
-endo_02
+endo_02		
+
+for_04
+				MOV R1, #2
+				MOV R3, #0
+until_04
+				CMP R1, #1000 	   ; äußere Schleife
+				BGT endo_02
+do_04
+if_02
+				LDRB R2, [R0, R1]
+				CMP R2, #1
+				BEQ then_02 			; ==1?
+				B endif_02
+then_02			
+				STRH R1, [R5, R3]
+				ADD R3, R3, #2
+				ADD R1, R1, #1
+endif_02
+				ADD R1, R1, #1 
+				B until_04
+
 
 forever
 				B forever
