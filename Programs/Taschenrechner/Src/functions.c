@@ -10,7 +10,7 @@
 #include "keypad.h"
 #include "token.h"
 #include "stack.h"
-#include "exceptions.h"
+#include "exception.h"
 #include "scanner.h"
 #include "exception.h"
 

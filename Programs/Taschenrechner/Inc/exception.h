@@ -1,5 +1,5 @@
 /**
- * @file exceptions.h
+ * @file exception.h
  * @author Milan Lingner, HAW Hamburg
  * @date Oct 2026
  * @brief This file stores the "magic numbers" used for Exceptions in the Stack
