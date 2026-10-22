@@ -20,65 +20,82 @@
 
 
 int plus(){
-    int *first;
-    int *second;
-    if(stack_pop(*first)){
+    int first;
+    int second;
+    if(stack_pop(&first)){
         return UNDERFLOW;
     }
-    if(stack_pop(*second)){
-        return UNDERFLOW
+    if(stack_pop(&second)){
+        return UNDERFLOW;
     }
-    int erg = (int *first + int *second);
+    int erg = first + second;
     return stack_push(erg);
 }
 
 int minus(){
-    if(getPointer() < 2){
+    int first;
+    int second;
+    if(stack_pop(&first)){
         return UNDERFLOW;
     }
-    int first = stack_pop();
-    int second = stack_pop();
-    int erg = second - first;
+    if(stack_pop(&second)){
+        return UNDERFLOW;
+    }
+    int erg = first - second;
     return stack_push(erg);
 }
 
 int mult(){
-    if(getPointer() < 2){
+    int first;
+    int second;
+    if(stack_pop(&first)){
         return UNDERFLOW;
     }
-    int first = stack_pop();
-    int second = stack_pop();
-    int erg = second * first;
+    if(stack_pop(&second)){
+        return UNDERFLOW;
+    }
+    int erg = first * second;
     return stack_push(erg);
 }
 
 int div(){
-    if(getPointer() < 2){
+    int first;
+    int second;
+    if(stack_pop(&first)){
         return UNDERFLOW;
     }
-    int first = stack_pop();
-    int second = stack_pop();
-    int erg = second / first;
+    if(stack_pop(&second)){
+        return UNDERFLOW;
+    } else if(second == 0){
+        return DIV_BY_ZERO;
+    }
+    int erg = first / second;
     return stack_push(erg);
 }
 
 int print(){
-    if(getPointer() < 0){
+    int line;
+    if(stack_pop(&line)){
         return UNDERFLOW;
     }
-    print_stdout((char* )&stack_peek(1));
+    print_stdout((char* )line);
+    stack_push(line);
     return 0;
 }
 
 int printAll(){
-    if(getPointer() < 2){
+    int line_one;
+    for (int i = 0; ; inc-expression) {
+    
+    }
+    if(stack_pop(&line)){
         return UNDERFLOW;
     }
-    for(int i = 0; i < 3; i++){
-        print_stdout((char*)&stack_peek(3));
-    }
+    print_stdout((char* )line);
+    stack_push(line);
     return 0;
 }
+
 int swap(){
     int first = stack_pop();
     int second = stack_pop();

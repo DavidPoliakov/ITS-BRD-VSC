@@ -25,45 +25,45 @@ int main(void) {
       T_token ein = next_token();
       switch(ein.tok) {
          case NUMBER:
-            if(push()){
-               return OVERFLOW;
+            if(stack_push()){
+               return STACK_OVERFLOW;
             }
             break;
          case PLUS:
             if(plus()){
-               return UNDERFLOW;
+               return STACK_UNDERFLOW;
             }
             break;       
          case MINUS:  
             if(minus()){
-               return UNDERFLOW;
+               return STACK_UNDERFLOW;
             }
             break;    
          case MULT:  
             if(mult()){
-               return UNDERFLOW;
+               return STACK_UNDERFLOW;
             }
             break;     
          case DIV:  
             if(div()){
-               return UNDERFLOW;
+               return STACK_UNDERFLOW;
             }
             break;
          case PRT:
             if(print()){
-               return UNDERFLOW;
+               return STACK_UNDERFLOW;
             }
             print();
             break;
          case SWAP:
             if(swap()){
-               return UNDERFLOW;
+               return STACK_UNDERFLOW;
             }
             swap();
             break;
          case PRT_ALL:
             if(print_all()){
-               return UNDERFLOW;
+               return STACK_UNDERFLOW;
             }
             break;
          case CLEAR:
