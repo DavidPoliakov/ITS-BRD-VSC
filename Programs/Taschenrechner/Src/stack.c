@@ -1,6 +1,6 @@
 #include "stack.h"
 
-#define STACK_SIZE 10
+#define STACK_SIZE 2
 
 static int stack[STACK_SIZE];
 static int sp = 0;

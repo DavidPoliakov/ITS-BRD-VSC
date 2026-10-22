@@ -40,7 +40,7 @@ int main(void) {
          int erg = stack_push(token.val);
          if (erg == -1) {
             set_err_mode();
-            print_stdout("overflow");
+            print_stdout("stack overflow");
          }
       }
    }
