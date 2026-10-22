@@ -15,7 +15,7 @@ int stack_push(int val) {
     return 0;
 }
 
-void stack_init() {
+void stack_clear() {
     sp = 0;
 }
 
@@ -26,10 +26,4 @@ int stack_pop(int *val) {
     *val = stack[--sp] ; 
     return 0;
 }
-int stack_peek(int t, int *val) {
-    if (t < 0 || t >= sp) {
-        return -1;
-    }
-    *val = stack[sp - 1 - t];
-    return 0;
-}
+
