@@ -20,47 +20,47 @@ int plus(){
     if(getPointer() < 2){
         return UNDERFLOW;
     }
-    int first = pop();
-    int second = pop();
+    int first = stack_pop();
+    int second = stack_pop();
     int erg = first + second;
-    return push(erg);
+    return stack_push(erg);
 }
 
 int minus(){
     if(getPointer() < 2){
         return UNDERFLOW;
     }
-    int first = pop();
-    int second = pop();
+    int first = stack_pop();
+    int second = stack_pop();
     int erg = second - first;
-    return push(erg);
+    return stack_push(erg);
 }
 
 int mult(){
     if(getPointer() < 2){
         return UNDERFLOW;
     }
-    int first = pop();
-    int second = pop();
+    int first = stack_pop();
+    int second = stack_pop();
     int erg = second * first;
-    return push(erg);
+    return stack_push(erg);
 }
 
 int div(){
     if(getPointer() < 2){
         return UNDERFLOW;
     }
-    int first = pop();
-    int second = pop();
+    int first = stack_pop();
+    int second = stack_pop();
     int erg = second / first;
-    return push(erg);
+    return stack_push(erg);
 }
 
 int print(){
     if(getPointer() < 0){
         return UNDERFLOW;
     }
-    print_stdout((char* )&getItem(getPointer()));
+    print_stdout((char* )&stack_peek(1));
     return 0;
 }
 
@@ -69,16 +69,16 @@ int printAll(){
         return UNDERFLOW;
     }
     for(int i = 0; i < 3; i++){
-        print_stdout((char*)&getItem(getPointer())-i);
+        print_stdout((char*)&stack_peek(3));
     }
     return 0;
 }
 int swap(){
-    int first = pop();
-    int second = pop();
+    int first = stack_pop();
+    int second = stack_pop();
     int a = 0;
-    if(a = push(second)){
-        return  push(first);
+    if(a = stack_push(second)){
+        return  stack_push(first);
     }
     return 
 }

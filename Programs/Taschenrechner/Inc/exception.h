@@ -8,8 +8,9 @@
 #ifndef EXCEPTIONS_H
 #define EXCEPTIONS_H
 
-#define OVERFLOW 1     //!< Token for an int number
-#define UNDERFLOW 2       //!< Token for + operator
-#define INT_OVERFLOW   3  //!< Token for - operator
+#define OVERFLOW "-1"     //!< Token for an int number
+#define UNDERFLOW "-2"       //!< Token for + operator
+#define INT_OVERFLOW "-3"  //!< Token for - operator
+#define DIV_BY_ZERO "-4"
 
 #endif
