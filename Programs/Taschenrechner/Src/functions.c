@@ -83,29 +83,34 @@ int print(){
     return 0;
 }
 
-int printAll(){
-    int line_one;
-    for (int i = 0; ; inc-expression) {
-    
-    }
-    if(stack_pop(&line)){
+int print_all(){
+    int line;
+    for (int i = 0; i < 4; i++) {
+        if(stack_pop(&line + i)){
         return UNDERFLOW;
+        }
+        print_stdout((char* )line + i);
     }
-    print_stdout((char* )line);
-    stack_push(line);
+    for (int i = 0; i < 4; i++) {
+        stack_push(line + 3 - i);
+    }
     return 0;
 }
 
 int swap(){
-    int first = stack_pop();
-    int second = stack_pop();
-    int a = 0;
-    if(a = stack_push(second)){
-        return  stack_push(first);
+    int first;
+    int second;
+    if(stack_pop(&first)){
+        return UNDERFLOW;
     }
-    return 
+    if(stack_pop(&second)){
+        return UNDERFLOW;
+    }
+    stack_push(second);
+    stack_push(first);
 }
+
 int clear(){
-    clear_stack();
+    stack_clear();
 }
 
