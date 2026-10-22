@@ -14,15 +14,21 @@
 #include "scanner.h"
 #include "exception.h"
 
+#ifndef UNDERFLOW
+#define UNDERFLOW (-1)
+#endif
 
 
 int plus(){
-    if(getPointer() < 2){
+    int *first;
+    int *second;
+    if(stack_pop(*first)){
         return UNDERFLOW;
     }
-    int first = stack_pop();
-    int second = stack_pop();
-    int erg = first + second;
+    if(stack_pop(*second)){
+        return UNDERFLOW
+    }
+    int erg = (int *first + int *second);
     return stack_push(erg);
 }
 

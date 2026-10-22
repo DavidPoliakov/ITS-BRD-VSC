@@ -5,12 +5,12 @@
  * @brief This file stores the "magic numbers" used for Exceptions in the Stack
  */
 
-#ifndef EXCEPTIONS_H
-#define EXCEPTIONS_H
+#ifndef EXCEPTION_H
+#define EXCEPTION_H
 
-#define OVERFLOW "-1"     //!< Token for an int number
-#define UNDERFLOW "-2"       //!< Token for + operator
-#define INT_OVERFLOW "-3"  //!< Token for - operator
-#define DIV_BY_ZERO "-4"
+#define STACK_OVERFLOW '-1'     //!< Token for an int number
+#define STACK_UNDERFLOW '-2'       //!< Token for + operator
+#define INT_OVERFLOW '-3'  //!< Token for - operator
+#define DIV_BY_ZERO '-4'
 
 #endif
