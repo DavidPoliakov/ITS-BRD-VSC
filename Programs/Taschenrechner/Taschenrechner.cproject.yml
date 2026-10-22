@@ -183,6 +183,7 @@ project:
         - file: Src/display.c
         - file: Src/scanner.c
         - file: Src/stack.c
+        - file: Src/functions.c
 
 
   components:

@@ -82,7 +82,7 @@ int print(){
     if(stack_pop(&line)){
         return STACK_UNDERFLOW;
     }
-    print_stdout((char* )line);
+    print_stdout((char*)&line);
     stack_push(line);
     return 0;
 }

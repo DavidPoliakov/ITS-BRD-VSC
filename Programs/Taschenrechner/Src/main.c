@@ -8,6 +8,7 @@
 /* Includes ------------------------------------------------------------------*/
 
 #include "exception.h"
+#include "init.h"
 #include "scanner.h"
 #include "display.h"
 #include "keypad.h"
@@ -19,6 +20,7 @@
 
 
 int main(void) {
+   initITSboard();
    init_display();
    makeKeyPad();
    while (true) {
