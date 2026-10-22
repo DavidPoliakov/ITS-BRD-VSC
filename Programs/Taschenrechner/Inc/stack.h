@@ -1,3 +1,9 @@
+/**
+ * @file stack.h
+ * @author Milan Lingner, HAW Hamburg
+ * @date Oct 2026
+ * @brief This file stores the "magic numbers" used for Exceptions in the Stack
+ */
 #ifndef STACK_H
 #define STACK_H
 
