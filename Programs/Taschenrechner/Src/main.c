@@ -25,7 +25,7 @@ int main(void) {
       T_token ein = next_token();
       switch(ein.tok) {
          case NUMBER:
-            if(stack_push()){
+            if(stack_push(ein.val)){
                return STACK_OVERFLOW;
             }
             break;
@@ -71,15 +71,14 @@ int main(void) {
             break;
          case DOUBLE:
             if(div()){
-               return OVERFLOW;
+               return STACK_OVERFLOW;
             }
             doppeln();
             break;
          case UNEXPECTED:
-            unexpected();
             break;
          case OVERFLOW:
-            overflow();
+            return STACK_OVERFLOW;
             break;
          default:
             continue;

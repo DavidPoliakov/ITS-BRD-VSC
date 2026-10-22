@@ -22,11 +22,13 @@
 int plus(){
     int first;
     int second;
-    if(stack_pop(&first)){
-        return UNDERFLOW;
+    int err_one = stack_pop(&first);
+    if(err_one){
+        return err_one;
     }
-    if(stack_pop(&second)){
-        return UNDERFLOW;
+    int err_two = stack_pop(&second);
+    if(err_two){
+        return err_two;
     }
     int erg = first + second;
     return stack_push(erg);
@@ -35,11 +37,13 @@ int plus(){
 int minus(){
     int first;
     int second;
-    if(stack_pop(&first)){
-        return UNDERFLOW;
+    int err_one = stack_pop(&first);
+    if(err_one){
+        return err_one;
     }
-    if(stack_pop(&second)){
-        return UNDERFLOW;
+    int err_two = stack_pop(&second);
+    if(err_two){
+        return err_two;
     }
     int erg = first - second;
     return stack_push(erg);
@@ -48,11 +52,13 @@ int minus(){
 int mult(){
     int first;
     int second;
-    if(stack_pop(&first)){
-        return UNDERFLOW;
+    int err_one = stack_pop(&first);
+    if(err_one){
+        return err_one;
     }
-    if(stack_pop(&second)){
-        return UNDERFLOW;
+    int err_two = stack_pop(&second);
+    if(err_two){
+        return err_two;
     }
     int erg = first * second;
     return stack_push(erg);
@@ -61,12 +67,15 @@ int mult(){
 int div(){
     int first;
     int second;
-    if(stack_pop(&first)){
-        return UNDERFLOW;
+    int err_one = stack_pop(&first);
+    if(err_one){
+        return err_one;
     }
-    if(stack_pop(&second)){
-        return UNDERFLOW;
-    } else if(second == 0){
+    int err_two = stack_pop(&second);
+    if(err_two){
+        return err_two;
+    }
+    if(second == 0){
         return DIV_BY_ZERO;
     }
     int erg = first / second;
