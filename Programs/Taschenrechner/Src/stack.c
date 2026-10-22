@@ -1,4 +1,6 @@
 #include "stack.h"
+#include "exception.h"
+#include "token.h"
 
 #define STACK_SIZE 2
 
@@ -7,27 +9,21 @@ static int sp = 0;
 
 int stack_push(int val) {
     if (sp >= STACK_SIZE) {
-        return -1;
+        return STACK_OVERFLOW;
     }
-    stack[sp++] = val; // sp nach hochsetzen,  ziel links
+    stack[sp++] = val; 
     return 0;
 }
 
-void stack_init() {
+void stack_clear() {
     sp = 0;
 }
 
 int stack_pop(int *val) {
     if (sp <= 0) {
-        return -1;
+        return STACK_UNDERFLOW;
     }
-    *val = stack[--sp] ; //erst sp runtersetzen, ziel links
+    *val = stack[--sp] ; 
     return 0;
 }
-int stack_peek(int t, int *val) {
-    if (t < 0 || t >= sp) {
-        return -1;
-    }
-    *val = stack[sp - 1 - t];
-    return 0;
-}
+
