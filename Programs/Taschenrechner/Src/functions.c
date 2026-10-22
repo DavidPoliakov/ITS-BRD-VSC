@@ -12,12 +12,7 @@
 #include "stack.h"
 #include "exception.h"
 #include "scanner.h"
-#include "exception.h"
-
-#ifndef UNDERFLOW
-#define UNDERFLOW (-1)
-#endif
-
+#include "functions.h"
 
 int plus(){
     int first;
@@ -85,7 +80,7 @@ int div(){
 int print(){
     int line;
     if(stack_pop(&line)){
-        return UNDERFLOW;
+        return STACK_UNDERFLOW;
     }
     print_stdout((char* )line);
     stack_push(line);
@@ -96,7 +91,7 @@ int print_all(){
     int line;
     for (int i = 0; i < 4; i++) {
         if(stack_pop(&line + i)){
-        return UNDERFLOW;
+        return STACK_UNDERFLOW;
         }
         print_stdout((char* )line + i);
     }
@@ -110,10 +105,10 @@ int swap(){
     int first;
     int second;
     if(stack_pop(&first)){
-        return UNDERFLOW;
+        return STACK_UNDERFLOW;
     }
     if(stack_pop(&second)){
-        return UNDERFLOW;
+        return STACK_UNDERFLOW;
     }
     stack_push(second);
     stack_push(first);
@@ -121,5 +116,15 @@ int swap(){
 
 int clear(){
     stack_clear();
+}
+
+int doppeln(){
+    int first;
+    int err_one = stack_pop(&first);
+    if(err_one){
+        return err_one;
+    }
+    stack_push(first);
+    stack_push(first);
 }
 

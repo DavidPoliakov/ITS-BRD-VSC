@@ -70,10 +70,9 @@ int main(void) {
             clear();
             break;
          case DOUBLE:
-            if(div()){
+            if(doppeln()){
                return STACK_OVERFLOW;
             }
-            doppeln();
             break;
          case UNEXPECTED:
             break;
