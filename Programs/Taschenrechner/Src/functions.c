@@ -6,11 +6,19 @@
  * @brief This module implements basic arithmetic functions with a stack.
  */
 
-#include "display.h"
 #include "terminal.h"
 #include "stack.h"
 #include "exception.h"
 #include "functions.h"
+#include "stdio.h"
+
+#define BUFFER_SIZE 11
+
+static void print_help(Terminal *term, int line){
+    char buf[BUFFER_SIZE];
+    sprintf(buf, "%d\n", line);
+    printTerm(buf, term);
+}
 
 int plus(){
     int first;
@@ -81,21 +89,21 @@ int print_first(Terminal *term){
     if(err_one){
         return STACK_UNDERFLOW;
     }
-    printTerm((char*)&line, term);
+    print_help(term, line);
     stack_push(line);
     return 0;
 }
 
-int print_all(){
-    int line;
+int print_all(Terminal *term){
+    int line[3];
     for (int i = 0; i < 4; i++) {
-        if(stack_pop(&line + i)){
+        if(stack_pop(&line[i])){
         return STACK_UNDERFLOW;
         }
-        print_stdout((char* )line + i);
     }
     for (int i = 0; i < 4; i++) {
-        stack_push(line + 3 - i);
+        print_help(term, line[i]);
+        stack_push(line[3 - i]);
     }
     return 0;
 }

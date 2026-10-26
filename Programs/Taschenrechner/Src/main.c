@@ -7,7 +7,7 @@
  */
 /* Includes ------------------------------------------------------------------*/
 
-#include "exception.h"
+
 #include "init.h"
 #include "scanner.h"
 #include "display.h"
@@ -15,9 +15,51 @@
 #include "token.h"
 #include "stack.h"
 #include "functions.h"
+#include "exception.h"
 
-
-
+static int do_something(T_token ein, Terminal *term){
+   switch(ein.tok) {
+         case NUMBER:
+            return stack_push(ein.val);
+            break;
+         case PLUS:
+            return plus();
+            break;       
+         case MINUS:  
+            return minus();
+            break;    
+         case MULT:  
+            return mult();
+            break;     
+         case DIV:  
+            return div();
+            break;
+         case PRT:
+            return print_first(term);
+            break;
+         case SWAP:
+            return swap();
+            break;
+         case PRT_ALL:
+            return print_all(term);
+            break;
+         case CLEAR:
+            return clear();
+            break;
+         case DOUBLE:
+            return doppeln();
+            break;
+         case UNEXPECTED:
+            return UNEXPECTED_TOKEN;
+            break;
+         case OVERFLOW:
+            return STACK_OVERFLOW;
+            break;
+         default:
+            return 0;
+            break;
+      }
+}
 
 int main(void) {
    initITSboard();
@@ -25,65 +67,14 @@ int main(void) {
    Terminal term = makeKeyPad();
    while (true) {
       T_token ein = next_token();
-      switch(ein.tok) {
-         case NUMBER:
-            if(stack_push(ein.val)){
-               return STACK_OVERFLOW;
-            }
-            break;
-         case PLUS:
-            if(plus()){
-               return STACK_UNDERFLOW;
-            }
-            break;       
-         case MINUS:  
-            if(minus()){
-               return STACK_UNDERFLOW;
-            }
-            break;    
-         case MULT:  
-            if(mult()){
-               return STACK_UNDERFLOW;
-            }
-            break;     
-         case DIV:  
-            if(div()){
-               return STACK_UNDERFLOW;
-            }
-            break;
-         case PRT:
-            if(print_first(&term)){
-               return STACK_UNDERFLOW;
-            }
-            break;
-         case SWAP:
-            if(swap()){
-               return STACK_UNDERFLOW;
-            }
-            swap();
-            break;
-         case PRT_ALL:
-            if(print_all()){
-               return STACK_UNDERFLOW;
-            }
-            break;
-         case CLEAR:
-            clear();
-            break;
-         case DOUBLE:
-            if(doppeln()){
-               return STACK_OVERFLOW;
-            }
-            break;
-         case UNEXPECTED:
-            break;
-         case OVERFLOW:
-            return STACK_OVERFLOW;
-            break;
-         default:
-            continue;
+      int err = do_something(ein, &term);
+      if(err){
+         print_except(err);
+         break;
       }
    }
 }
+
+
 
 // EOF

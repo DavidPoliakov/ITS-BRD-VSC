@@ -8,14 +8,17 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
+#include "terminal.h"
+
 int doppeln();
 int plus();
 int minus();
 int mult();
 int div();
-int print();
-int print_all();
+int print_first(Terminal*);
+int print_all(Terminal *term);
 int swap();
 int clear();
+
 
 #endif
