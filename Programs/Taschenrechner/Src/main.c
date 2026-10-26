@@ -22,7 +22,7 @@
 int main(void) {
    initITSboard();
    init_display();
-   makeKeyPad();
+   Terminal term = makeKeyPad();
    while (true) {
       T_token ein = next_token();
       switch(ein.tok) {
@@ -52,10 +52,9 @@ int main(void) {
             }
             break;
          case PRT:
-            if(print()){
+            if(print_first(&term)){
                return STACK_UNDERFLOW;
             }
-            print();
             break;
          case SWAP:
             if(swap()){

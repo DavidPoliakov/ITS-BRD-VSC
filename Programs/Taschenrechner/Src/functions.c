@@ -7,11 +7,9 @@
  */
 
 #include "display.h"
-#include "keypad.h"
-#include "token.h"
+#include "terminal.h"
 #include "stack.h"
 #include "exception.h"
-#include "scanner.h"
 #include "functions.h"
 
 int plus(){
@@ -77,12 +75,13 @@ int div(){
     return stack_push(erg);
 }
 
-int print(){
+int print_first(Terminal *term){
     int line;
-    if(stack_pop(&line)){
+    int err_one = stack_pop(&line);
+    if(err_one){
         return STACK_UNDERFLOW;
     }
-    print_stdout((char*)&line);
+    printTerm((char*)&line, term);
     stack_push(line);
     return 0;
 }
@@ -112,10 +111,12 @@ int swap(){
     }
     stack_push(second);
     stack_push(first);
+    return 0;
 }
 
 int clear(){
     stack_clear();
+    return 0;
 }
 
 int doppeln(){
@@ -126,5 +127,6 @@ int doppeln(){
     }
     stack_push(first);
     stack_push(first);
+    return 0;
 }
 

@@ -22,7 +22,7 @@ int stack_pop(int *val) {
     if (stp <= 0) {
         return STACK_UNDERFLOW;
     }
-    *val = stack[--stp] ; 
+    *val = stack[stp--] ; 
     return 0;
 }
 
