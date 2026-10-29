@@ -69,11 +69,14 @@ int main(void) {
       T_token ein = next_token();
       int err = process_input(ein, &term);
       if(err){
-         print_except(err, term);
-         if(next_token().tok == CLEAR){
-            clear();
-            Terminal term = init_display();
-         }
+         print_except(err, &term); 
+         clear_echo_term();
+         char chr = ENTER;
+         while (!(chr == CLEAR)) {
+            chr = getKeyPadInput();
+         };
+         clear();
+         term = init_display();
       }
    }
 }

@@ -15,7 +15,7 @@ int plus();
 int minus();
 int mult();
 int div();
-int print_first(Terminal*);
+int print_first(Terminal *term);
 int print_all(Terminal *term);
 int swap();
 int clear();
