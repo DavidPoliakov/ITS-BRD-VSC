@@ -12,7 +12,7 @@
 
 #define MAX_SIZE 17
 
-void print_except(int err){
+void print_except(int err, Terminal term){
     char chr[MAX_SIZE];
     switch (err){
         case 1:
@@ -28,13 +28,16 @@ void print_except(int err){
             sprintf(chr, "INT_OVERFLOW");
             break;
         case -4:
+            sprintf(chr, "INT_UNDERFLOW");
+            break;
+        case -5:
             sprintf(chr, "DIV_BY_ZERO");
             break;
         default:
             sprintf(chr, "UNKNOWN_ERROR");
             break;
     }
-    lcdPrintS(chr);
+    printTerm(chr, term);
 }
 
 // EOF

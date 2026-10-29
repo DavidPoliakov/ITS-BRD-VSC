@@ -23,13 +23,17 @@ static void print_help(Terminal *term, int line){
 int plus(){
     int first;
     int second;
-    int err_one = stack_pop(&first);
-    if(err_one){
-        return err_one;
+    int err_su = stack_pop(&first);
+    if(err_su){
+        return err_su;
     }
-    int err_two = stack_pop(&second);
-    if(err_two){
-        return err_two;
+    err_su = stack_pop(&second);
+    if(err_su){
+        return err_su;
+    }
+    int err_io;
+    if(__builtin_add_overflow(first, second, &err_io)){
+        return INT_OVERFLOW;
     }
     int erg = first + second;
     return stack_push(erg);
@@ -38,13 +42,17 @@ int plus(){
 int minus(){
     int first;
     int second;
-    int err_one = stack_pop(&first);
-    if(err_one){
-        return err_one;
+    int err_su = stack_pop(&first);
+    if(err_su){
+        return err_su;
     }
-    int err_two = stack_pop(&second);
-    if(err_two){
-        return err_two;
+    err_su = stack_pop(&second);
+    if(err_su){
+        return err_su;
+    }
+    int err_io;
+    if(__builtin_sub_overflow(first, second, &err_io)){
+        return INT_UNDERFLOW;
     }
     int erg = first - second;
     return stack_push(erg);
@@ -53,13 +61,17 @@ int minus(){
 int mult(){
     int first;
     int second;
-    int err_one = stack_pop(&first);
-    if(err_one){
-        return err_one;
+    int err_su = stack_pop(&first);
+    if(err_su){
+        return err_su;
     }
-    int err_two = stack_pop(&second);
-    if(err_two){
-        return err_two;
+    err_su = stack_pop(&second);
+    if(err_su){
+        return err_su;
+    }
+    int err_io;
+    if(__builtin_mul_overflow(first, second, &err_io)){
+        return INT_UNDERFLOW;
     }
     int erg = first * second;
     return stack_push(erg);
@@ -68,13 +80,13 @@ int mult(){
 int div(){
     int first;
     int second;
-    int err_one = stack_pop(&first);
+    int err_su = stack_pop(&first);
+    if(err_su){
+        return err_su;
+    }
+    int err_one = stack_pop(&second);
     if(err_one){
         return err_one;
-    }
-    int err_two = stack_pop(&second);
-    if(err_two){
-        return err_two;
     }
     if(second == 0){
         return DIV_BY_ZERO;
@@ -85,8 +97,8 @@ int div(){
 
 int print_first(Terminal *term){
     int line;
-    int err_one = stack_pop(&line);
-    if(err_one){
+    int err_su = stack_pop(&line);
+    if(err_su){
         return STACK_UNDERFLOW;
     }
     print_help(term, line);
@@ -129,9 +141,9 @@ int clear(){
 
 int doppeln(){
     int first;
-    int err_one = stack_pop(&first);
-    if(err_one){
-        return err_one;
+    int err_so = stack_pop(&first);
+    if(err_so){
+        return err_so;
     }
     stack_push(first);
     stack_push(first);

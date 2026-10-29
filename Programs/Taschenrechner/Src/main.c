@@ -62,14 +62,18 @@ static int process_input(T_token ein, Terminal *term){
 }
 
 int main(void) {
+   clear();
    initITSboard();
    Terminal term = init_display();
    while (true) {
       T_token ein = next_token();
       int err = process_input(ein, &term);
       if(err){
-         print_except(err);
-         break;
+         print_except(err, term);
+         if(next_token().tok == CLEAR){
+            clear();
+            Terminal term = init_display();
+         }
       }
    }
 }
