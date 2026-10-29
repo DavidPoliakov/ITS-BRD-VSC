@@ -8,14 +8,15 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 #include <stdbool.h>
+#include "terminal.h"
 
 /*
  ****************************************************************************************
  *  @brief      This function initialize the output function.
  *
- *  @return     void
+ *  @return     Terminal
  ****************************************************************************************/
-void init_display(void);
+Terminal init_display(void);
 
 /*
  ****************************************************************************************

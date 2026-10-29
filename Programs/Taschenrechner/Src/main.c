@@ -17,7 +17,7 @@
 #include "functions.h"
 #include "exception.h"
 
-static int do_something(T_token ein, Terminal *term){
+static int process_input(T_token ein, Terminal *term){
    switch(ein.tok) {
          case NUMBER:
             return stack_push(ein.val);
@@ -53,7 +53,7 @@ static int do_something(T_token ein, Terminal *term){
             return UNEXPECTED_TOKEN;
             break;
          case OVERFLOW:
-            return STACK_OVERFLOW;
+            return INT_OVERFLOW;
             break;
          default:
             return 0;
@@ -63,11 +63,10 @@ static int do_something(T_token ein, Terminal *term){
 
 int main(void) {
    initITSboard();
-   init_display();
-   Terminal term = makeKeyPad();
+   Terminal term = init_display();
    while (true) {
       T_token ein = next_token();
-      int err = do_something(ein, &term);
+      int err = process_input(ein, &term);
       if(err){
          print_except(err);
          break;

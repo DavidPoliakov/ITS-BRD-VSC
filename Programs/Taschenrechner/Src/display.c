@@ -24,7 +24,7 @@ void clear_echo_term(void) { clearTerm(&echo_term); }
 
 void print_stdout(char *msg) { printTerm(msg, &stdout_term); }
 
-void init_display(void) {
+Terminal init_display(void) {
    GUI_init(DEFAULT_BRIGHTNESS); // Initialisierung des LCD Boards mit Touch
    TP_Init(false);               // Initialisierung des LCD Boards mit Touch
    Terminal term = makeKeyPad();
@@ -39,6 +39,7 @@ void init_display(void) {
    echo_term = genTerm(cor, term.bottomRight, BLUE, YELLOW, term.font);
    clear_echo_term();
    clear_stdout();
+   return term;
 }
 
 void print_to_echo_line(char chr) {

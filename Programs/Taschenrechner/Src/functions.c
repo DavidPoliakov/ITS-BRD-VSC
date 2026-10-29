@@ -96,14 +96,14 @@ int print_first(Terminal *term){
 
 int print_all(Terminal *term){
     int line[3];
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 3; i++) {
         if(stack_pop(&line[i])){
         return STACK_UNDERFLOW;
         }
     }
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 3; i++) {
         print_help(term, line[i]);
-        stack_push(line[3 - i]);
+        stack_push(line[2 - i]);
     }
     return 0;
 }
