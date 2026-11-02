@@ -2,7 +2,7 @@
 #include "exception.h"
 #include "token.h"
 
-#define STACK_SIZE 2
+#define STACK_SIZE 10
 
 static int stack[STACK_SIZE];
 static int sp = 0;
