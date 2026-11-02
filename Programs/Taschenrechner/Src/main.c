@@ -7,7 +7,7 @@
  */
 /* Includes ------------------------------------------------------------------*/
 
-#include "exception.h"
+
 #include "init.h"
 #include "scanner.h"
 #include "display.h"
@@ -15,74 +15,72 @@
 #include "token.h"
 #include "stack.h"
 #include "functions.h"
+#include "exception.h"
 
-
-int main(void) {
-   initITSboard();
-   init_display();
-   makeKeyPad();
-   while (true) {
-      T_token ein = next_token();
-      switch(ein.tok) {
+static int process_input(T_token ein, Terminal *term){
+   switch(ein.tok) {
          case NUMBER:
-            if(stack_push(ein.val)){
-               return STACK_OVERFLOW;
-            }
+            return stack_push(ein.val);
             break;
          case PLUS:
-            if(plus()){
-               return STACK_UNDERFLOW;
-            }
+            return plus();
             break;       
          case MINUS:  
-            if(minus()){
-               return STACK_UNDERFLOW;
-            }
+            return minus();
             break;    
          case MULT:  
-            if(mult()){
-               return STACK_UNDERFLOW;
-            }
+            return mult();
             break;     
          case DIV:  
-            if(div()){
-               return STACK_UNDERFLOW;
-            }
+            return div();
             break;
          case PRT:
-            if(print()){
-               return STACK_UNDERFLOW;
-            }
-            print();
+            return print_first(term);
             break;
          case SWAP:
-            if(swap()){
-               return STACK_UNDERFLOW;
-            }
-            swap();
+            return swap();
             break;
          case PRT_ALL:
-            if(print_all()){
-               return STACK_UNDERFLOW;
-            }
+            return print_all(term);
             break;
          case CLEAR:
-            clear();
+            return clear();
             break;
          case DOUBLE:
-            if(doppeln()){
-               return STACK_OVERFLOW;
-            }
+            return doppeln();
             break;
          case UNEXPECTED:
+            return UNEXPECTED_TOKEN;
             break;
          case OVERFLOW:
-            return STACK_OVERFLOW;
+            return INT_OVERFLOW;
             break;
          default:
-            continue;
+            return 0;
+            break;
+      }
+}
+
+int main(void) {
+   clear();
+   initITSboard();
+   Terminal term = init_display();
+   while (true) {
+      T_token ein = next_token();
+      int err = process_input(ein, &term);
+      if(err){
+         print_except(err, &term); 
+         clear_echo_term();
+         char chr = ENTER;
+         while (!(chr == CLEAR)) {
+            chr = getKeyPadInput();
+         };
+         clear();
+         term = init_display();
       }
    }
 }
+
+
 
 // EOF

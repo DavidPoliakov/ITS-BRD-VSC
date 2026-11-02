@@ -6,24 +6,34 @@
  * @brief This module implements basic arithmetic functions with a stack.
  */
 
-#include "display.h"
-#include "keypad.h"
-#include "token.h"
+#include "terminal.h"
 #include "stack.h"
 #include "exception.h"
-#include "scanner.h"
 #include "functions.h"
+#include "stdio.h"
+
+#define BUFFER_SIZE 11
+
+static void print_help(Terminal *term, int line){
+    char buf[BUFFER_SIZE];
+    sprintf(buf, "%d\n", line);
+    printTerm(buf, term);
+}
 
 int plus(){
     int first;
     int second;
-    int err_one = stack_pop(&first);
-    if(err_one){
-        return err_one;
+    int err_su = stack_pop(&first);
+    if(err_su){
+        return err_su;
     }
-    int err_two = stack_pop(&second);
-    if(err_two){
-        return err_two;
+    err_su = stack_pop(&second);
+    if(err_su){
+        return err_su;
+    }
+    int err_io;
+    if(__builtin_add_overflow(first, second, &err_io)){
+        return INT_OVERFLOW;
     }
     int erg = first + second;
     return stack_push(erg);
@@ -32,13 +42,17 @@ int plus(){
 int minus(){
     int first;
     int second;
-    int err_one = stack_pop(&first);
-    if(err_one){
-        return err_one;
+    int err_su = stack_pop(&first);
+    if(err_su){
+        return err_su;
     }
-    int err_two = stack_pop(&second);
-    if(err_two){
-        return err_two;
+    err_su = stack_pop(&second);
+    if(err_su){
+        return err_su;
+    }
+    int err_io;
+    if(__builtin_sub_overflow(first, second, &err_io)){
+        return INT_UNDERFLOW;
     }
     int erg = first - second;
     return stack_push(erg);
@@ -47,13 +61,17 @@ int minus(){
 int mult(){
     int first;
     int second;
-    int err_one = stack_pop(&first);
-    if(err_one){
-        return err_one;
+    int err_su = stack_pop(&first);
+    if(err_su){
+        return err_su;
     }
-    int err_two = stack_pop(&second);
-    if(err_two){
-        return err_two;
+    err_su = stack_pop(&second);
+    if(err_su){
+        return err_su;
+    }
+    int err_io;
+    if(__builtin_mul_overflow(first, second, &err_io)){
+        return INT_UNDERFLOW;
     }
     int erg = first * second;
     return stack_push(erg);
@@ -62,13 +80,13 @@ int mult(){
 int div(){
     int first;
     int second;
-    int err_one = stack_pop(&first);
+    int err_su = stack_pop(&first);
+    if(err_su){
+        return err_su;
+    }
+    int err_one = stack_pop(&second);
     if(err_one){
         return err_one;
-    }
-    int err_two = stack_pop(&second);
-    if(err_two){
-        return err_two;
     }
     if(second == 0){
         return DIV_BY_ZERO;
@@ -77,26 +95,27 @@ int div(){
     return stack_push(erg);
 }
 
-int print(){
+int print_first(Terminal *term){
     int line;
-    if(stack_pop(&line)){
+    int err_su = stack_pop(&line);
+    if(err_su){
         return STACK_UNDERFLOW;
     }
-    print_stdout((char* )line);
+    print_help(term, line);
     stack_push(line);
     return 0;
 }
 
-int print_all(){
-    int line;
-    for (int i = 0; i < 4; i++) {
-        if(stack_pop(&line + i)){
+int print_all(Terminal *term){
+    int line[3];
+    for (int i = 0; i < 3; i++) {
+        if(stack_pop(&line[i])){
         return STACK_UNDERFLOW;
         }
-        print_stdout((char* )line + i);
     }
-    for (int i = 0; i < 4; i++) {
-        stack_push(line + 3 - i);
+    for (int i = 0; i < 3; i++) {
+        print_help(term, line[i]);
+        stack_push(line[2 - i]);
     }
     return 0;
 }
@@ -112,19 +131,22 @@ int swap(){
     }
     stack_push(second);
     stack_push(first);
+    return 0;
 }
 
 int clear(){
     stack_clear();
+    return 0;
 }
 
 int doppeln(){
     int first;
-    int err_one = stack_pop(&first);
-    if(err_one){
-        return err_one;
+    int err_so = stack_pop(&first);
+    if(err_so){
+        return err_so;
     }
     stack_push(first);
     stack_push(first);
+    return 0;
 }
 
