@@ -20,19 +20,19 @@ void print_except(int err, Terminal *term){
         case 1:
             sprintf(chr, "UNEXPECTED_TOKEN\n Press 'C'");
             break;
-        case -1:
+        case STACK_OVERFLOW:
             sprintf(chr, "STACK_OVERFLOW\n Press 'C'");
             break;
-        case -2:
+        case STACK_UNDERFLOW:
             sprintf(chr, "STACK_UNDERFLOW\n Press 'C'");
             break;
-        case -3:
+        case INT_OVERFLOW:
             sprintf(chr, "INT_OVERFLOW\n Press 'C'");
             break;
-        case -4:
+        case INT_UNDERFLOW:
             sprintf(chr, "INT_UNDERFLOW\n Press 'C'");
             break;
-        case -5:
+        case DIV_BY_ZERO:
             sprintf(chr, "DIV_BY_ZERO\n Press 'C'");
             break;
         default:

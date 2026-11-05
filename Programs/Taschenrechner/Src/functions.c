@@ -11,8 +11,9 @@
 #include "exception.h"
 #include "functions.h"
 #include "stdio.h"
+#include "token.h"
 
-#define BUFFER_SIZE 11
+#define BUFFER_SIZE 13
 
 static void print_help(Terminal *term, int line){
     char buf[BUFFER_SIZE];
@@ -71,7 +72,15 @@ int mult(){
     }
     int err_io;
     if(__builtin_mul_overflow(first, second, &err_io)){
-        return INT_UNDERFLOW;
+        if(first > 0){
+            if(second > 0){
+                return OVERFLOW;
+            } else {
+               return INT_UNDERFLOW; 
+            }
+            return INT_UNDERFLOW;
+        }    
+        return INT_OVERFLOW;
     }
     int erg = first * second;
     return stack_push(erg);
@@ -110,7 +119,7 @@ int print_all(Terminal *term){
     int line[3];
     for (int i = 0; i < 3; i++) {
         if(stack_pop(&line[i])){
-        return STACK_UNDERFLOW;
+            return STACK_UNDERFLOW;
         }
     }
     for (int i = 0; i < 3; i++) {
@@ -129,8 +138,8 @@ int swap(){
     if(stack_pop(&second)){
         return STACK_UNDERFLOW;
     }
-    stack_push(second);
     stack_push(first);
+    stack_push(second);
     return 0;
 }
 
@@ -146,7 +155,6 @@ int doppeln(){
         return err_so;
     }
     stack_push(first);
-    stack_push(first);
-    return 0;
+    return stack_push(first);;
 }
 
