@@ -76,7 +76,7 @@ int main(void) {
             chr = getKeyPadInput();
          };
          clear();
-         term = init_display();
+         clear_stdout();
       }
    }
 }

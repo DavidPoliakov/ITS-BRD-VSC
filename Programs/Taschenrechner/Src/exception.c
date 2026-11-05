@@ -18,25 +18,25 @@ void print_except(int err, Terminal *term){
     char chr[MAX_SIZE];
     switch (err){
         case 1:
-            sprintf(chr, "UNEXPECTED_TOKEN\n Press 'C'");
+            sprintf(chr, "UNEXPECTED_TOKEN\n Press 'C'\n");
             break;
         case STACK_OVERFLOW:
-            sprintf(chr, "STACK_OVERFLOW\n Press 'C'");
+            sprintf(chr, "STACK_OVERFLOW\n Press 'C'\n");
             break;
         case STACK_UNDERFLOW:
-            sprintf(chr, "STACK_UNDERFLOW\n Press 'C'");
+            sprintf(chr, "STACK_UNDERFLOW\n Press 'C'\n");
             break;
         case INT_OVERFLOW:
-            sprintf(chr, "INT_OVERFLOW\n Press 'C'");
+            sprintf(chr, "INT_OVERFLOW\n Press 'C'\n");
             break;
         case INT_UNDERFLOW:
-            sprintf(chr, "INT_UNDERFLOW\n Press 'C'");
+            sprintf(chr, "INT_UNDERFLOW\n Press 'C'\n");
             break;
         case DIV_BY_ZERO:
-            sprintf(chr, "DIV_BY_ZERO\n Press 'C'");
+            sprintf(chr, "DIV_BY_ZERO\n Press 'C'\n");
             break;
         default:
-            sprintf(chr, "UNKNOWN_ERROR\n Press 'C'");
+            sprintf(chr, "UNKNOWN_ERROR\n Press 'C'\n");
             break;
     }
     printTerm(chr, term);

@@ -14,6 +14,7 @@
 #include "token.h"
 
 #define BUFFER_SIZE 13
+#define INT_MINIMUM (-2147483648)
 
 static void print_help(Terminal *term, int line){
     char buf[BUFFER_SIZE];
@@ -43,11 +44,11 @@ int plus(){
 int minus(){
     int first;
     int second;
-    int err_su = stack_pop(&first);
+    int err_su = stack_pop(&second);
     if(err_su){
         return err_su;
     }
-    err_su = stack_pop(&second);
+    err_su = stack_pop(&first);
     if(err_su){
         return err_su;
     }
@@ -62,25 +63,22 @@ int minus(){
 int mult(){
     int first;
     int second;
-    int err_su = stack_pop(&first);
+    int err_su = stack_pop(&second);
     if(err_su){
         return err_su;
     }
-    err_su = stack_pop(&second);
+    err_su = stack_pop(&first);
     if(err_su){
         return err_su;
     }
     int err_io;
     if(__builtin_mul_overflow(first, second, &err_io)){
-        if(first > 0){
-            if(second > 0){
-                return OVERFLOW;
+        if(((first > 0) && (second > 0) )|| ((first < 0) && (second < 0))){
+                err_io = OVERFLOW;
             } else {
-               return INT_UNDERFLOW; 
+               err_io = INT_UNDERFLOW; 
             }
-            return INT_UNDERFLOW;
-        }    
-        return INT_OVERFLOW;
+        return err_io;
     }
     int erg = first * second;
     return stack_push(erg);
@@ -89,13 +87,16 @@ int mult(){
 int div(){
     int first;
     int second;
-    int err_su = stack_pop(&first);
+    int err_su = stack_pop(&second);
     if(err_su){
         return err_su;
     }
-    int err_one = stack_pop(&second);
+    int err_one = stack_pop(&first);
     if(err_one){
         return err_one;
+    }
+    if(first == INT_MINIMUM){
+        return INT_OVERFLOW;
     }
     if(second == 0){
         return DIV_BY_ZERO;
@@ -117,14 +118,16 @@ int print_first(Terminal *term){
 
 int print_all(Terminal *term){
     int line[3];
-    for (int i = 0; i < 3; i++) {
+    int i = 0;
+    for (;i < 3; i++) {
         if(stack_pop(&line[i])){
-            return STACK_UNDERFLOW;
+            break;
         }
     }
-    for (int i = 0; i < 3; i++) {
+    i--;
+    for (; i >= 0; i--) {
         print_help(term, line[i]);
-        stack_push(line[2 - i]);
+        stack_push(line[i]);
     }
     return 0;
 }
