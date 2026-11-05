@@ -4,7 +4,7 @@ cmsis-tools-environment:
   solution: ../Taschenrechner.csolution.yml
   environment:
     path:
-      - /Users/davidpoliakov/.vscode/extensions/arm.vscode-cmsis-debugger-1.10.0-darwin-arm64/tools/pyocd
+      - /Users/davidpoliakov/.vscode/extensions/arm.vscode-cmsis-debugger-1.10.1-darwin-arm64/tools/pyocd
       - /Users/davidpoliakov/.vscode/extensions/arm.cmsis-csolution-1.72.0-darwin-arm64/tools/cmsis-toolbox/bin
       - /Users/davidpoliakov/.vcpkg/artifacts/2139c4c6/tools.kitware.cmake/3.28.4/bin
       - /Users/davidpoliakov/.vcpkg/artifacts/2139c4c6/tools.ninja.build.ninja/1.13.2
@@ -12,7 +12,7 @@ cmsis-tools-environment:
       - /Users/davidpoliakov/.vcpkg/artifacts/2139c4c6/compilers.arm.arm.none.eabi.gcc/13.3.1/bin
       - /Users/davidpoliakov/.vcpkg/artifacts/2139c4c6/compilers.arm.llvm.embedded/17.0.1/bin
       - /Users/davidpoliakov/.vcpkg/artifacts/2139c4c6/debuggers.arm.armdbg/6.9.0/bin
-      - /Users/davidpoliakov/.vscode/extensions/arm.vscode-cmsis-debugger-1.10.0-darwin-arm64/tools/gdb/bin
+      - /Users/davidpoliakov/.vscode/extensions/arm.vscode-cmsis-debugger-1.10.1-darwin-arm64/tools/gdb/bin
     variables:
       cmake: /Users/davidpoliakov/.vcpkg/artifacts/2139c4c6/tools.kitware.cmake/3.28.4/bin/cmake
       cmake_gui: /Users/davidpoliakov/.vcpkg/artifacts/2139c4c6/tools.kitware.cmake/3.28.4/bin/cmake-gui
@@ -23,12 +23,12 @@ cmsis-tools-environment:
       CLANG_TOOLCHAIN_17_0_1: /Users/davidpoliakov/.vcpkg/artifacts/2139c4c6/compilers.arm.llvm.embedded/17.0.1/bin/
   tools:
     - name: pyOCD
-      version: 0.46.0
+      version: v0.46.1
       origin: built-in
       provider:
         type: vscode-extension
         id: arm.vscode-cmsis-debugger
-      directory: /Users/davidpoliakov/.vscode/extensions/arm.vscode-cmsis-debugger-1.10.0-darwin-arm64/tools/pyocd
+      directory: /Users/davidpoliakov/.vscode/extensions/arm.vscode-cmsis-debugger-1.10.1-darwin-arm64/tools/pyocd
       manual: https://pyocd.io/docs/
     - name: CMSIS-Toolbox
       version: 2.15.0
@@ -86,5 +86,5 @@ cmsis-tools-environment:
       provider:
         type: vscode-extension
         id: arm.vscode-cmsis-debugger
-      directory: /Users/davidpoliakov/.vscode/extensions/arm.vscode-cmsis-debugger-1.10.0-darwin-arm64/tools/gdb/bin
+      directory: /Users/davidpoliakov/.vscode/extensions/arm.vscode-cmsis-debugger-1.10.1-darwin-arm64/tools/gdb/bin
       manual: https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain

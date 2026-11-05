@@ -34,7 +34,7 @@ void print_except(int err, Terminal *term){
             break;
         case -5:
             sprintf(chr, "DIV_BY_ZERO\n Press 'C'");
-            break;
+            break;f
         default:
             sprintf(chr, "UNKNOWN_ERROR\n Press 'C'");
             break;
