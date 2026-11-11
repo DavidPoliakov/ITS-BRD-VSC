@@ -5,7 +5,7 @@
  * @brief   definiert die zur Phase struct dazugehörigen Funktionen
  ******************************************************************************
  */
- #include "phase.h";
+ #include "phase.h"
  #define ZUSTANDLÄNGE 5
  #define MASK 0x0003 
  #define TAB 0x9C //= 1001 1100 kann per bit-shift operationen den Phasen einen verständlichen Wert zuordnen
@@ -23,13 +23,13 @@ static int phase_switch_tab[ZUSTANDLÄNGE][ZUSTANDLÄNGE] =   {   {EQU, FOR, ERR
 static int counter = 0;
 static int dir = 0;
 
-Phase getPhase(int io1, int io2, int time){
+Phase get_phase(int io_in, uint32_t time){
     //0 0 = 0 -> 0
     //1 0 = 2 -> 1
     //1 1 = 3 -> 2 
     //0 1 = 1 -> 3
-    int tab_shift = (((io1 << 1) & MASK) + (io2 & MASK));
-    int phase_value = ((TAB >> (tab_shift * 2)) & MASK);
+
+    int phase_value = ((TAB >> (io_in * 2)) & MASK);
     Phase now = {phase_value, time};
     return now;
 }  
@@ -50,4 +50,9 @@ int get_counter(void){
 
 int get_dir(void){
     return dir;
+}
+
+void reset_counter(){
+    counter = 0;
+    dir = 0;
 }
