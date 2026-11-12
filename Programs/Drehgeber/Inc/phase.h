@@ -8,6 +8,8 @@
 #ifndef PHASE_H
 #define PHASE_H
 
+#include <stdint.h>
+
 typedef struct {
     int val;
     int time;
@@ -18,7 +20,7 @@ typedef struct {
 * @param io_in der aktuelle Wert des io_registers
 * @return ein Phasenstruct mit der aktuellen Phase 
 **************************************************************************/
- Phase get_phase(int io_in, int time);
+ Phase get_phase(int io_in, uint32_t time);
 
 /********************************************************************
 * berechnet den Wert des Phasenwechsels
@@ -27,13 +29,13 @@ typedef struct {
 * @return -1/-3 für reguläre Drehung, -2 für keinen Phasenwechsel und 0 
 * für illegale Phasenwechsel
 ********************************************************************** */
- int phase_switch(Phase now, Phase old);
+int phase_switch(Phase now, Phase old);
 
 /***************************************************************************
 * updatet den Counter und die Richtung (dir)
 * @param count der aktuelle Stand des Phasenwechsels
 *******************************************************************/
- void update_counter(int count);
+int update_counter(int count);
 
 /******************************************************************
 * gibt den aktuellen Wert des Counters
