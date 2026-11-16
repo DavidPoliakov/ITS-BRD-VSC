@@ -117,7 +117,11 @@
   "cmake.ignoreCMakeListsMissing": true,
   "C_Cpp_Runner.msvcBatchPath": "",
   "clangd.arguments": [
+<<<<<<< HEAD
     "--compile-commands-dir=/Users/davidpoliakov/TI_labor/gitProjekte/ITS-BRD-VSC/Programs/Drehgeber/out/Drehgeber/ITSboard/Debug"
+=======
+    "--compile-commands-dir=c:\\Users\\milan\\Documents\\ITS\\GT\\GitAblage\\David\\ITS-BRD-VSC\\Programs\\Drehgeber\\out\\Drehgeber\\ITSboard\\Debug"
+>>>>>>> 773f65f1e586da9810bb76bc31254e0a148c0188
   ],
   "debug.hideSlowPreLaunchWarning": true,
   "debug.showInStatusBar": "never",
