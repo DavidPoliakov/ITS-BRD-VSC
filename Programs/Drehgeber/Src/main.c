@@ -53,7 +53,6 @@ int main(void) {
          //Counter updaten
          int current_count = update_counter(raw_phase_shift);
          //ausgabe updaten
-         update_output(current_count);
       }
       //aktuelle Phase wird zur vergangenen für nächste iteration des Loops
       old = now;
