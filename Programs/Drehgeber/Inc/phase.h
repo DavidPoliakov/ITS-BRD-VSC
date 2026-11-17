@@ -12,7 +12,7 @@
 
 typedef struct {
     int val;
-    int time;
+    uint32_t time;
 } Phase;
 
 /************************************************************************* 
@@ -20,7 +20,7 @@ typedef struct {
 * @param io_in der aktuelle Wert des io_registers
 * @return ein Phasenstruct mit der aktuellen Phase 
 **************************************************************************/
- Phase get_phase(int io_in, uint32_t time);
+Phase get_phase(int io_in, uint32_t time);
 
 /********************************************************************
 * berechnet den Wert des Phasenwechsels

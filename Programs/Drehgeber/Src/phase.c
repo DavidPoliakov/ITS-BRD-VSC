@@ -32,7 +32,6 @@ Phase get_phase(int io_in, uint32_t time){
     //1 0 = 2 -> 1
     //1 1 = 3 -> 2 
     //0 1 = 1 -> 3
-
     int phase_value = ((TAB >> (io_in * 2)) & MASK);
     Phase now = {phase_value, time};
     return now;

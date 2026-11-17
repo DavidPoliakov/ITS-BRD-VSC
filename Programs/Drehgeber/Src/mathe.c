@@ -1,4 +1,5 @@
 #include "mathe.h"
+#include "phase.h"
 
 #define PHASENWECHSEL_PRO_UMDREHUNG 1200.0
 #define GRAD_PRO_UMDREHUNG          360.0
@@ -8,16 +9,16 @@
 #endif
 #define TICKS_PRO_SEKUNDE (TICKS_PER_US * 1000000.0)
 
-double berechneWinkel(Phase p) {
-    return (double)p.zaehler * GRAD_PRO_UMDREHUNG / PHASENWECHSEL_PRO_UMDREHUNG;
+double berechneWinkel() {
+    return (double)get_counter() * GRAD_PRO_UMDREHUNG / PHASENWECHSEL_PRO_UMDREHUNG;
 }
 
 double berechneGeschwindigkeit(Phase alt, Phase neu) {
-    uint32_t ticks = neu.zeit - alt.zeit;   
+    uint32_t ticks = neu.time - alt.time;   
     if (ticks == 0U) {  //unsigned div mit 0       
         return 0.0;     
     }
-    double winkel = berechneWinkel(neu) - berechneWinkel(alt);
+    double winkel = berechneWinkel() - berechneWinkel();
     double sec     = (double)ticks / TICKS_PRO_SEKUNDE;
     return winkel / sec;
 }            
