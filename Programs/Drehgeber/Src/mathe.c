@@ -9,8 +9,8 @@
 #endif
 #define TICKS_PRO_SEKUNDE (TICKS_PER_MS * 1000.0)
 
-Phase last_out;
-double angle = 0;
+static Phase last_out;
+static double angle = 0;
 
 double berechneGeschwindigkeit(Phase neu) {
     uint32_t ticks = neu.time - last_out.time;   
