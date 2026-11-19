@@ -8,11 +8,11 @@
 #endif
 #define TICKS_PRO_SEKUNDE (TICKS_PER_US * 1000000.0)
 
-double berechneWinkel(Phase p) {
+double berechneWinkel(Phasenzaehler p) {
     return (double)p.zaehler * GRAD_PRO_UMDREHUNG / PHASENWECHSEL_PRO_UMDREHUNG;
 }
 
-double berechneGeschwindigkeit(Phase alt, Phase neu) {
+double berechneGeschwindigkeit(Phasenzaehler alt, Phasenzaehler neu) {
     uint32_t ticks = neu.zeit - alt.zeit;   
     if (ticks == 0U) {  //unsigned div mit 0       
         return 0.0;     

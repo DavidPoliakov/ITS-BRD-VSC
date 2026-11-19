@@ -6,10 +6,10 @@
 typedef struct {
     int32_t  zaehler;   
     uint32_t zeit;      
-} Phase;
+} Phasenzaehler;
 
-double berechneWinkel(Phase p);
+double berechneWinkel(Phasenzaehler p);
 
-double berechneGeschwindigkeit(Phase alt, Phase neu); // alt ist zeitlich früher als neu
+double berechneGeschwindigkeit(Phasenzaehler alt, Phasenzaehler neu); // alt ist zeitlich früher als neu
 
 #endif 
