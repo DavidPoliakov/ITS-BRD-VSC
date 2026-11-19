@@ -30,18 +30,25 @@
 
 #define TICKS_PER_US 180 //aktuelle Einstellung TIM2 = 180MHZ
 #define MSEC_SCALER_10 (100 * TICKS_PER_US) //stellt auf 10 Tick pro ms
+#define OUT_TIMER 3000
+#define ARR_SCALER (OUT_TIMER -1)
 
-#define OUT_TIMER 3000 //update nach 300 ms
+ //update nach 300 ms
 
 static Phase old;
 static uint32_t last_out = 0;
+
+void timer_config(){
+   TIM2->PSC = MSEC_SCALER_10 - 1; //Timer auf 1 tick pro 10 ms setzen
+   TIM2->ARR = ARR_SCALER;
+}
 
 //init ausgelagert um das ganze System bei reset neuzustarten.
 void init(){
    init_output(); 
    reset_counter(); // counter resetten
    initTimer(); //Zusatz hier: Timer wird neu initialisiert
-   TIM2->PSC = MSEC_SCALER_10 - 1; //Timer auf 1 tick pro 10 ms setzen
+   
    while(TIM2->PSC < OUT_TIMER){} //verzögern um Ausgabe im SuperLoop zu garantieren (evtl. rausnehmen)
    uint8_t raw_moder = GPIOF->IDR; //einlesen neuer Phase
    uint32_t time = TIM2->CNT; //einlesen neuer Zeit

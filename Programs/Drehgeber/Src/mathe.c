@@ -9,6 +9,8 @@
 #endif
 #define TICKS_PRO_SEKUNDE (TICKS_PER_MS * 1000.0)
 
+static Phase last_out;
+static double angle = 0;
 double berechneWinkel(Phase p) {
     return (double)p.zaehler * GRAD_PRO_UMDREHUNG / PHASENWECHSEL_PRO_UMDREHUNG;
 }
