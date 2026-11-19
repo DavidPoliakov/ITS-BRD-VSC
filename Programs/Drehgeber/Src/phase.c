@@ -33,7 +33,7 @@ Phase get_phase(uint8_t io_in, uint32_t time){
     //1 1 = 3 -> 2 
     //0 1 = 1 -> 3
     int phase_value = ((TAB >> (io_in * 2)) & MASK);
-    Phase now = {phase_value, time};
+    Phase now = {phase_value, time, counter};
     return now;
 }  
 
@@ -41,10 +41,11 @@ int phase_switch(Phase now, Phase old){
     return phase_switch_tab[old.val][now.val];
 }
 
-int update_counter(int count){
+int update_counter(int count, Phase *now){
     count = count + STANDARD;
     counter = counter + count;
     dir = count;
+    now->count = counter;
     return counter;
 }
 

@@ -13,6 +13,7 @@
 typedef struct {
     int val;
     uint32_t time;
+    int count;
 } Phase;
 
 /************************************************************************* 
@@ -32,10 +33,11 @@ Phase get_phase(uint8_t io_in, uint32_t time);
 int phase_switch(Phase now, Phase old);
 
 /***************************************************************************
-* updatet den Counter und die Richtung (dir)
+* updatet den Counter und die Richtung (dir), sowohl den internen int als auch die 
+* Phase
 * @param count der aktuelle Stand des Phasenwechsels
 *******************************************************************/
-int update_counter(int count);
+int update_counter(int count, Phase *now);
 
 /******************************************************************
 * gibt den aktuellen Wert des Counters

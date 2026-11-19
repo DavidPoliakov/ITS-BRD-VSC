@@ -4,8 +4,8 @@
 #include <stdint.h>
 #include "phase.h"
 
-double berechneWinkel(int counter);
+double get_angle(void);
 
-double berechneGeschwindigkeit(Phase alt, Phase neu); // alt ist zeitlich früher als neu
+double berechneGeschwindigkeit(Phase now); // alt ist zeitlich früher als neu
 
 #endif 

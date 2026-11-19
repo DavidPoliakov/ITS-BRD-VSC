@@ -4,21 +4,27 @@
 #define PHASENWECHSEL_PRO_UMDREHUNG 1200.0
 #define GRAD_PRO_UMDREHUNG          360.0
 
-#ifndef TICKS_PER_US 
-#define TICKS_PER_US 90
+#ifndef TICKS_PER_MS 
+#define TICKS_PER_MS 10
 #endif
-#define TICKS_PRO_SEKUNDE (TICKS_PER_US * 1000000.0)
+#define TICKS_PRO_SEKUNDE (TICKS_PER_MS * 1000.0)
 
-double berechneWinkel(int counter) {
-    return (double) counter * GRAD_PRO_UMDREHUNG / PHASENWECHSEL_PRO_UMDREHUNG;
-}
+Phase last_out;
+double angle = 0;
 
-double berechneGeschwindigkeit(Phase alt, Phase neu) {
-    uint32_t ticks = neu.time - alt.time;   
+double berechneGeschwindigkeit(Phase neu) {
+    uint32_t ticks = neu.time - last_out.time;   
     if (ticks == 0U) {  //unsigned div mit 0       
         return 0.0;     
     }
-    double winkel = berechneWinkel(1) - berechneWinkel(2);
+    double new_angle = (double)neu.count * GRAD_PRO_UMDREHUNG / PHASENWECHSEL_PRO_UMDREHUNG;
+    double winkel = new_angle - angle;
     double sec     = (double)ticks / TICKS_PRO_SEKUNDE;
+    last_out = neu;
+    angle = new_angle;
     return winkel / sec;
 }            
+
+double get_angle(){
+    return angle;
+}

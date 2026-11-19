@@ -9,10 +9,22 @@
 
 #include "phase.h"
 
-void update_output(int current_count, Phase old, Phase Now);
+/**************************************
+* initialisiert den Output (hauptsächlich durch ausgebe der Konstanten char*)
+*************************************** */
+void init_output(void);
+
+/********************************************************************
+* updatet den Output (ohne direkt die Ausgabe zu verändern, bündelt den Aufruf)
+* @param current_count der aktuelle Zählwert
+*
+********************************************************************** */
+void update_output(int current_count, Phase now);
 
 void update_led(int current_count);
 
-void update_lcd(double winkel, double geschwindigkeit);
+void update_val(double geschwindigkeit, double winkel);
+
+void inc_update_lcd(void);
 
 #endif
