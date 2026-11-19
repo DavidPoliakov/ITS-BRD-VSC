@@ -11,12 +11,9 @@
 
 static Phase last_out;
 static double angle = 0;
-double berechneWinkel(Phase p) {
-    return (double)p.zaehler * GRAD_PRO_UMDREHUNG / PHASENWECHSEL_PRO_UMDREHUNG;
-}
 
-double berechneGeschwindigkeit(Phase alt, Phase neu) {
-    uint32_t ticks = neu.zeit - alt.zeit;   
+double berechneGeschwindigkeit(Phase neu) {
+    uint32_t ticks = neu.time - last_out.time;   
     if (ticks == 0U) {  //unsigned div mit 0       
         return 0.0;     
     }

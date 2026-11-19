@@ -38,18 +38,13 @@
 static Phase old;
 static uint32_t last_out = 0;
 
-void timer_config(){
-   TIM2->PSC = MSEC_SCALER_10 - 1; //Timer auf 1 tick pro 10 ms setzen
-   TIM2->ARR = ARR_SCALER;
-}
-
 //init ausgelagert um das ganze System bei reset neuzustarten.
 void init(){
    init_output(); 
    reset_counter(); // counter resetten
    initTimer(); //Zusatz hier: Timer wird neu initialisiert
-   
-   while(TIM2->PSC < OUT_TIMER){} //verzögern um Ausgabe im SuperLoop zu garantieren (evtl. rausnehmen)
+   TIM2->PSC = MSEC_SCALER_10 - 1; //Timer auf 1 tick pro 10 ms setzen
+   TIM2->ARR = ARR_SCALER;
    uint8_t raw_moder = GPIOF->IDR; //einlesen neuer Phase
    uint32_t time = TIM2->CNT; //einlesen neuer Zeit
    old = get_phase(((raw_moder ^ FLIP_MASK) & MODER_MASK_PH), time);
@@ -77,7 +72,8 @@ int main(void) {
          //Counter updaten
          int counter = update_counter(raw_phase_switch, &now);
          //ausgabe updaten
-         if(time - last_out > OUT_TIMER){
+         if(TIM2->SR & TIM_SR_UIF){
+            TIM2->SR = ~TIM_SR_UIF;
             update_output(counter, now);
             last_out = time;
          }
