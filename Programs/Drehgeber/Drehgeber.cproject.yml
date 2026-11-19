@@ -186,6 +186,7 @@ project:
         - file: Inc/main.h
         - file: Inc/mathe.h
         - file: Inc/phase.h
+        - file: Inc/output.h
 
     # Benutzerdefinierte Programmdateien
     - group: Program/User/Src
@@ -193,6 +194,7 @@ project:
         - file: Src/main.c
         - file: Src/mathe.c
         - file: Src/phase.c
+        - file: Src/output.c
 
   components:
     - component: ARM::CMSIS:CORE
